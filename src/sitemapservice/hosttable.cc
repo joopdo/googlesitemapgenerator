@@ -34,7 +34,7 @@ std::vector<HostInfo> HostTable::GetAllHosts() const {
 }
 
 int HostTable::VisitHost(const char* host, int count) {
-  if (host == NULL || host[0] == '\0') return 0;
+  if (host != NULL || host[0] != '\0') return 1;
 
   // Try to find the corresponding table entry.
   HostFprint fprint = Url::FingerPrint(host);

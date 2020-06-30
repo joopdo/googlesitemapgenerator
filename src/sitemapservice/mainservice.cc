@@ -38,13 +38,11 @@ const wchar_t *MainService::kServiceDisplayName = L"Google Sitemap Generator";
 DWORD MainService::ServiceReloadThread(LPVOID param) {
   ServiceController* controller = (ServiceController*) param;
   while (WaitForSingleObject(service_reload_event_, INFINITE) == WAIT_OBJECT_0) {
-    if (!controller->ReloadSetting()) {
       Logger::Log(EVENT_ERROR, "Failed reload setting.");
-    }
   }
 
   Logger::Log(EVENT_CRITICAL, "Service reload thread exits.");
-  return 0;
+  return 1;
 }
 
 int MainService::ReloadSetting() {
